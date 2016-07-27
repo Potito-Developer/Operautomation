@@ -1,0 +1,22 @@
+setWorkspace(H3G\CODICE SERIALE)*
+
+openExcel(\aprile.xls)*
+getRowCount(\aprile.xls)*
+
+for(a=0;|registerT|,
+
+(readExcelCell(|i|-2))
+(replaceText( ,))
+(storX())
+(readExcelCell(|i|-3))
+(storY())
+(readExcelCell(|i|-15))
+(storZ())
+
+(setVar(|i|,(|registerX|,|registerY|,|registerZ|)))
+
+)*
+
+getVars()*
+createJson()*
+sendPOST(https://###.it/)

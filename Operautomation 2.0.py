@@ -56,11 +56,14 @@ import html
 from datetime import datetime, timedelta
 import calendar
 import sys
-import pyautogui
+#import pyautogui
+import json
+import requests
 
 browser = None
 main_window_handle = None
 elem = None
+excelDF = None
 registerT = None
 registerX = None
 registerY = None
@@ -676,17 +679,23 @@ def setVar(information):
     if len(values) == 0:
         result = ""
     elif len(values) == 1:
-        result = values[0]
+        if len(values[0].split(",")) == 1:
+            result = replaceRegisterValues(values[0])
+        else:
+            result = replaceRegisterValues(values[0]).split(",")
     else:
         for (x, val) in enumerate(values):
             result[x] = val.split(",")
-    VARS[information.split(",")[0]] = replaceRegisterValues(result)
+    VARS[information.split(",")[0]] = result
 def unsetVar(varName):
     global VARS
     del VARS[varName]
 def getVar(varName):
     global registerT
     registerT = VARS[varName]
+def getVars():
+    global registerT
+    registerT = VARS
 
 def numToMonth(monthNum):
     global registerT
@@ -724,6 +733,13 @@ def mouseClickPosition(information):
 
 def clearElem():
     elem.clear()
+
+def createJson():
+    global registerT
+    registerT = json.dumps(registerT, sort_keys=True, indent=4)
+
+def sendPOST(url):
+    requests.post(url, data=registerT)
 
 def storX():
     global registerX
@@ -1068,6 +1084,8 @@ for line in lines:
         unsetVar(information)
     elif instruction == "getVar":
         getVar(information)
+    elif instruction == "getVars":
+        getVars()
     elif instruction == "numToMonth":
         numToMonth(information)
     elif instruction == "renameFile":
@@ -1082,6 +1100,10 @@ for line in lines:
         mouseClickPosition(information)
     elif instruction == "clearElem":
         clearElem(information)
+    elif instruction == "createJson":
+        createJson()
+    elif instruction == "sendPOST":
+        sendPOST(information)
     elif instruction == "storY":
         storY()
     elif instruction == "storZ":

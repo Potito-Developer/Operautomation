@@ -1,0 +1,39 @@
+prepareWorkspace()*
+getCurrDate(%Y)*
+storX()*
+getCurrDate(%m)*
+numToMonth(|registerT|)*
+addTextToRegistry( )*
+addX()*
+storX()*
+createFolder(|registerX|)*
+setWorkspace(ATTIVAZIONI GIORNALIERE\downloads\|registerX|)*
+getFiles()*
+forEach(a,0,
+
+(getFileName(a))
+(zpaddingLeft(2))
+(substr(:2))
+(storY())
+(getCurrDate(%d))
+(ifEqual(|registerY|,-1,(
+
+(getFileName(a))
+(convertToExcel(|registerT|.xls))
+(getFullFileName(a))
+(substr(:-4))
+(addTextToRegistry( - converted.xls\n))
+(storW())
+(lodZ())
+(addW())
+(storZ())
+(removeFile(a))
+
+)())))*
+
+getFiles()*
+createArrayFromString(b,|registerZ|,\n)*
+mergeExcel(b,|registerY|.xls)*
+
+forEach(c,0,(removeFile(c)))*
+moveBetweenWorkspaces(ATTIVAZIONI GIORNALIERE\downloads\|registerX|\|registerY|.xls,MERGE EXCEL\|registerX|\|registerY|.xls,0)

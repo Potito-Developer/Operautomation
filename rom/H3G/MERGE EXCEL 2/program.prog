@@ -1,0 +1,20 @@
+prepareWorkspace()*
+setWorkspace(H3G\PORT OUT\maggio)*
+getFiles()*
+forEach(a,0,
+
+(getFullFileName(a))
+(addTextToRegistry(\n))
+(storW())
+(lodZ())
+(addW())
+(storZ())
+
+)*
+
+lodZ()*
+substr(:-2)*
+createArrayFromString(b,|registerT|,\n)*
+appendExcel(b,result.xls,1)*
+
+moveBetweenWorkspaces(H3G\PORT OUT\maggio\result.xls,H3G\MERGE EXCEL 2\maggio.xls,0)

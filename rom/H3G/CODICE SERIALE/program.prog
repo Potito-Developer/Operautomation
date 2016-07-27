@@ -4,14 +4,15 @@ setWorkspace(H3G\MERGE EXCEL 2)*
 setVar(a,())*
 setVar(d,())*
 setVar(z,(0))*
+openExcel(\maggio.xls)*
 getRowCount(\maggio.xls)*
 for(a=0;|registerT|,
 
-(readExcelCell(\maggio.xls,|i|-15))
+(readExcelCell(|i|-15))
 
 (ifEqual(,-1,(
 
-(readExcelCell(\maggio.xls,|i|-3))
+(readExcelCell(|i|-3))
 (storW())
 (lodX())
 (addW())
@@ -81,10 +82,11 @@ input(Inserisci il token)*
 setText(1234|registerT|)*
 sendEnter()*
 
+
 forEach(b,a,
 
 (getVar(b))
-(readExcelCell(\maggio.xls,|registerT|-7))
+(readExcelCell(|registerT|-7))
 
 (ifEqual(Respinta,-1,(
 
@@ -101,7 +103,7 @@ forEach(b,a,
 )(
 
 (getVar(b))
-(readExcelCell(\maggio.xls,|registerT|-5))
+(readExcelCell(|registerT|-5))
 
 (ifEqual(Completato,-1,(
 
@@ -155,7 +157,7 @@ forEach(b,a,
 
 (selectId(INSTALLED_DATE$|i|,()))
 (getVar(b))
-(readExcelCell(\maggio.xls,|registerT|-12))
+(readExcelCell(|registerT|-12))
 (setVar(e,(|registerT|)))
 (getText())
 (dateFormatConversion(%d/%m/%Y,%m/%d/%Y))

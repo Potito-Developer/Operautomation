@@ -30,7 +30,7 @@ while(stopCycle == 0):
         PROGRAM_PATH = PROGRAM_PATH + "\\" + programs[progN - 1]
         if os.path.isfile(PROGRAM_PATH + "\program.prog"):
             PROGRAM_PATH = PROGRAM_PATH + "\program.prog"
-            currProgName = programs[progN - 1]
+            currProgName = PROGRAM_PATH
             print("\n\nProgramma selezionato: " + PROGRAM_PATH + "\n\n\nSto lavorando per te...")
             stopCycle = 1
         else:
@@ -552,6 +552,12 @@ def replaceText(information):
     informations = information.split(",")
     registerT = registerT.replace(informations[0].replace("\\n", "\x0a"), informations[1].replace("\\n", "\x0a"))
 
+'''def splitText(information):
+    global registerT
+    sys.exit()
+    informations = information.split(",", 1)
+    registerT = registerT.split(informations[1])[int(infofrmations[0])]'''
+
 def substr(stringDatas):
     global registerT
     informations = stringDatas.split(":")
@@ -682,11 +688,20 @@ def setVar(information):
         if len(values[0].split(",")) == 1:
             result = replaceRegisterValues(values[0])
         else:
-            result = replaceRegisterValues(values[0]).split(",")
+            dts = replaceRegisterValues(values[0]).split(",")
+            for (x, dt) in enumerate(dts):
+                if ":" in dt:
+                    result[dt.split(":", 1)[0]] = dt.split(":", 1)[1]
+                else:
+                    result[x] = dt
     else:
         for (x, val) in enumerate(values):
             result[x] = val.split(",")
-    VARS[information.split(",")[0]] = result
+    #if information.split(",", 1)[0].isdigit():
+    VARS[int(information.split(",")[0])] = result
+    #else:
+        #VARS[information.split(",")[0]] = result
+    
 def unsetVar(varName):
     global VARS
     del VARS[varName]
@@ -739,7 +754,8 @@ def createJson():
     registerT = json.dumps(registerT, sort_keys=True, indent=4)
 
 def sendPOST(url):
-    requests.post(url, data=registerT)
+    global registerT
+    registerT = requests.post(url, data={"data": registerT})
 
 def storX():
     global registerX
@@ -910,14 +926,17 @@ def getRowCount(pathToFile):
     df = xl.parse(xl.sheet_names[0])
     registerT = df.shape[0]
 
-def openExcel(pathToFile):
+def openExcel(information):
     global excelDF
+    pathToFile = information.split(",")[0]
+    sheet = information.split(",")[1]
     if not "\\" in pathToFile:
         pathToFile = cycleIDs[pathToFile][1]
     else:
         pathToFile = workspace + "\\" + pathToFile[1:]
-    xl = pd.ExcelFile(pathToFile)
-    excelDF = xl.parse(xl.sheet_names[0])
+    #xl = pd.ExcelFile(pathToFile, keep_default_na=False)
+    #excelDF = xl.parse(xl.sheet_names[int(sheet)])
+    excelDF = pd.read_excel(open(pathToFile,'rb'), sheetname=int(sheet), keep_default_na=False)
 
 def readExcelCell(cellCoordinates):
     global registerT
@@ -1054,6 +1073,8 @@ for line in lines:
         extractText(information)
     elif instruction == "replaceText":
         replaceText(information)
+    #elif instruction == "splitText":
+    #    splitText(information)
     elif instruction == "substr":
         substr(information)
     elif instruction == "createArrayFromString":

@@ -1,22 +1,23 @@
 setWorkspace(H3G\CODICE SERIALE)*
 
-openExcel(\aprile.xls)*
+openExcel(\aprile.xls,0)*
 getRowCount(\aprile.xls)*
 
 for(a=0;|registerT|,
 
-(readExcelCell(|i|-2))
-(replaceText( ,))
+(readExcelCell(|i|-0))
 (storX())
-(readExcelCell(|i|-3))
+(readExcelCell(|i|-1))
 (storY())
-(readExcelCell(|i|-15))
+(readExcelCell(|i|-2))
 (storZ())
+(readExcelCell(|i|-3))
+(storW())
 
-(setVar(|i|,(|registerX|,|registerY|,|registerZ|)))
+(setVar(|i|,(name:|registerX|,cod:|registerY|,iccid:|registerZ|,status:|registerW|)))
 
 )*
 
 getVars()*
 createJson()*
-sendPOST(https://###.it/)
+sendPOST(https://masterattivazioni.it/index.php?r=ajax/portout&token=ilfuggitivo&mese=4&anno=2016)

@@ -685,18 +685,13 @@ def setVar(information):
     if len(values) == 0:
         result = ""
     elif len(values) == 1:
-        if len(values[0].split(",")) == 1:
-            result = replaceRegisterValues(values[0])
-        else:
-            dts = replaceRegisterValues(values[0]).split(",")
-            for (x, dt) in enumerate(dts):
-                if ":" in dt:
-                    result[dt.split(":", 1)[0]] = dt.split(":", 1)[1]
-                else:
-                    result[x] = dt
+        result = replaceRegisterValues(values[0])
     else:
         for (x, val) in enumerate(values):
-            result[x] = val.split(",")
+            if ":" in val:
+                result[val.split(":", 1)[0]] = val.split(":", 1)[1]
+            else:
+                result[x] = val
     if information.split(",", 1)[0].isdigit():
         VARS[int(information.split(",")[0])] = result
     else:

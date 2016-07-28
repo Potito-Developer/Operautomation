@@ -116,7 +116,7 @@ forEach(b,a,
 (setRegister(0))
 )))
 
-(wait(10))
+(wait(3))
 (selectClass(PSHYPERLINK,|registerT|,()))
 (sendEnter())
 (selectFrame(2))

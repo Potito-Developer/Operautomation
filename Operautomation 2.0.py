@@ -689,14 +689,14 @@ def setVar(information):
     else:
         for (x, val) in enumerate(values):
             if ":" in val:
-                result[val.split(":", 1)[0]] = val.split(":", 1)[1]
+                result[val.split(":", 1)[0]] = replaceRegisterValues(val.split(":", 1)[1])
             else:
-                result[x] = val
+                result[x] = replaceRegisterValues(val)
     if information.split(",", 1)[0].isdigit():
         VARS[int(information.split(",")[0])] = result
     else:
         VARS[information.split(",")[0]] = result
-    
+
 def unsetVar(varName):
     global VARS
     del VARS[varName]

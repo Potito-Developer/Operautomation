@@ -14,10 +14,9 @@ for(a=0;|registerT|,
 (readExcelCell(|i|-3))
 (storW())
 
-(setVar(|i|,(name:|registerX|,cod:|registerY|,iccid:|registerZ|,status:|registerW|)))
+(setVar(|i|,(name:|registerX|)(cod:|registerY|)(iccid:|registerZ|)(status:|registerW|)))
 
 )*
 
 getVars()*
-createJson()*
-sendPOST(https://masterattivazioni.it/index.php?r=ajax/portout&token=ilfuggitivo&mese=4&anno=2016)
+createJson()

@@ -4,7 +4,7 @@ setWorkspace(H3G\MERGE EXCEL 2)*
 setVar(a,())*
 setVar(d,())*
 setVar(z,(0))*
-openExcel(\maggio.xls)*
+openExcel(\maggio.xls,0)*
 getRowCount(\maggio.xls)*
 for(a=0;|registerT|,
 

@@ -10,7 +10,7 @@ import os
 import os.path
 
 PROGRAM_PATH = "rom"
-currProgName = ""
+currProgName = "out"
 workspace = ""
 
 print("Benvenuto in Operautomation, il sistema che semplifica il sistema.\n\nScegli il programma da avviare:\n")
@@ -27,10 +27,10 @@ while(stopCycle == 0):
     progN = eval(input('\nQuale programma vorresti avviare: '))
 
     if progN > 0 and progN <= len(programs):
-        PROGRAM_PATH = PROGRAM_PATH + "\\" + programs[progN - 1]
+        PROGRAM_PATH += "\\" + programs[progN - 1]
+        currProgName += "\\" + programs[progN - 1]
         if os.path.isfile(PROGRAM_PATH + "\program.prog"):
-            PROGRAM_PATH = PROGRAM_PATH + "\program.prog"
-            currProgName = PROGRAM_PATH
+            PROGRAM_PATH += "\program.prog"
             print("\n\nProgramma selezionato: " + PROGRAM_PATH + "\n\n\nSto lavorando per te...")
             stopCycle = 1
         else:
@@ -115,7 +115,7 @@ def replaceRegisterValues(inputStr):
 
 def prepareWorkspace():
     global workspace
-    workspace = os.getcwd() + "\\out\\" + currProgName
+    workspace = os.getcwd() + currProgName
     if not os.path.exists(workspace):
         os.makedirs(workspace)
 def setWorkspace(path):
@@ -123,7 +123,7 @@ def setWorkspace(path):
     workspace = os.getcwd() + "\\out\\" + path
 def restoreWorkspace():
     global workspace
-    workspace = os.getcwd() + "\\out\\" + currProgName
+    workspace = os.getcwd() + currProgName
 
 def initFirefox(savepath = ""):
     global browser
@@ -697,10 +697,10 @@ def setVar(information):
     else:
         for (x, val) in enumerate(values):
             result[x] = val.split(",")
-    #if information.split(",", 1)[0].isdigit():
-    VARS[int(information.split(",")[0])] = result
-    #else:
-        #VARS[information.split(",")[0]] = result
+    if information.split(",", 1)[0].isdigit():
+        VARS[int(information.split(",")[0])] = result
+    else:
+        VARS[information.split(",")[0]] = result
     
 def unsetVar(varName):
     global VARS

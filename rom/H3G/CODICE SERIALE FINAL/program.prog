@@ -1,17 +1,15 @@
 prepareWorkspace()*
 setWorkspace(H3G\MERGE EXCEL 2)*
 
-setVar(a,())*
-setVar(d,())*
-setVar(z,(0))*
-getRowCount(\maggio.xls)*
+openExcel(\aprile.xls,0)*
+getRowCount(\aprile.xls)*
 for(a=0;|registerT|,
 
-(readExcelCell(\maggio.xls,|i|-15))
+(readExcelCell(|i|-4))
 
 (ifEqual(,-1,(
 
-(readExcelCell(\maggio.xls,|i|-3))
+(readExcelCell(|i|-1))
 (storW())
 (lodX())
 (addW())
@@ -20,9 +18,9 @@ for(a=0;|registerT|,
 
 )(
 
-(setRegister(|i|))
-(addValToT(1))
-(setVar(z,(|registerT|)))
+(lodX())
+(addTextToRegistry(\n))
+(storX())
 
 )))
 
@@ -43,34 +41,6 @@ ifEqual(,-1,(
 createArrayFromString(a,|registerT|,\n)*
 
 clearX()*
-loadFromFile(maggio - elaboratedNums.txt)*
-ifEqual(,-1,()(
-
-(storX())
-(createArrayFromString(d,|registerX|,\n))
-
-))*
-
-getVar(z)*
-ifEqual(0,-1,(
-
-(setRegister(Codice USIM))
-(createArrayFromString(f,|registerT|,\n))
-(getVar(z))
-(newExcel(f,15,|registerT|))
-(setVar(g,(maggio.xls,temp.xls)))
-(mergeExcel(g,result.xls))
-(removeFile(\maggio.xls))
-(renameFile(result.xls,maggio.xls))
-(removeFile(\temp.xls))
-
-)())*
-
-getVar(z)*
-setVar(b,(|registerT|))*
-addValToT(1)*
-setVar(z,(|registerT|))*
-
 
 initFirefox()*
 nav(https://webstation3.h3g.it/autenticazione/MainServlet?TYPE=33554432&REALMOID=06-dc051320-3c89-1012-b426-838589750cb3&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-V28Eh3qJ9516BBeLVrH2Q8QnmzOwo%2FvWbvFaNPT6arG75TSWwvPkDaCt8LYg6RYn&TARGET=-SM-https%3A%2F%2Fwebstation3.h3g.it%2Fps%2F)*
@@ -81,40 +51,26 @@ input(Inserisci il token)*
 setText(1234|registerT|)*
 sendEnter()*
 
+setVar(b,(0))*
+setVar(c,(1))*
 forEach(b,a,
 
-(getVar(b))
-(readExcelCell(\maggio.xls,|registerT|-7))
-
-(ifEqual(Respinta,-1,(
-
-(setRegister(KO))
-(createArrayFromString(f,|registerT|,\n))
-(getVar(z))
-(newExcel(f,15,|registerT|))
-(setVar(g,(maggio.xls,temp.xls)))
-(mergeExcel(g,result.xls))
-(removeFile(\maggio.xls))
-(renameFile(result.xls,maggio.xls))
-(removeFile(\temp.xls))
-
-)(
 
 (getVar(b))
-(readExcelCell(\maggio.xls,|registerT|-5))
+(readExcelCell(|registerT|-7))
 
-(ifEqual(Completato,-1,(
-
-(clearT())
+(clearT(s))
 (addVarFECycleToRegistry(b))
-(getLength())
+
+(ifEqual(,-1,(
+
 (ifEqual(16,-1,(
 (setRegister(1))
 )(
 (setRegister(0))
 )))
 
-(wait(10))
+(wait(3))
 (selectClass(PSHYPERLINK,|registerT|,()))
 (sendEnter())
 (selectFrame(2))
@@ -133,13 +89,13 @@ forEach(b,a,
 (alertDismiss((
 
 (setRegister(Problema riscontrato nella ricerca delle SIM associate: controllo manuale richiesto))
-(createArrayFromString(f,|registerT|,\n))
-(getVar(z))
-(newExcel(f,15,|registerT|))
-(setVar(g,(maggio.xls,temp.xls)))
-(mergeExcel(g,result.xls))
-(removeFile(\maggio.xls))
-(renameFile(result.xls,maggio.xls))
+(createArrayFromString(d,|registerT|,\n))
+(getVar(c))
+(newExcel(d,4,|registerT|))
+(setVar(e,(aprile.xls,temp.xls)))
+(mergeExcel(e,result.xls))
+(removeFile(\aprile.xls))
+(renameFile(result.xls,aprile.xls))
 (removeFile(\temp.xls))
 (selectFrame())
 (selectFrame(0))
@@ -149,63 +105,28 @@ forEach(b,a,
 )(
 
 (setVar(c,(0)))
+(getVar(b))
+(readExcelCell(|registerT|-3))
+(setVar(e,(|registerT|)))
 (for(c=0;30,
 
-(ifElemExists(id||INSTALLED_DATE$|i|,(
-
-(selectId(INSTALLED_DATE$|i|,()))
-(getVar(b))
-(readExcelCell(\maggio.xls,|registerT|-12))
-(setVar(e,(|registerT|)))
-(getText())
-(dateFormatConversion(%d/%m/%Y,%m/%d/%Y))
-(ifEqual(e,0,(
+(ifElemExists(id||ASSETTAG$|i|,(
 
 (selectId(ASSETTAG$|i|,()))
 (getText())
-(ifIsInArrayVAR(d,()(
-
-(setVar(c,(1)))
-(addTextToRegistry(\n))
-(storW())
-(lodX())
-(addW())
-(storX())
-(createArrayFromString(d,|registerX|,\n))
-
-(sendEnter())
-(selectId(B.RF_INSTPROD_VIEW_HIERARCHY,()))
-(sendEnter())
-(ifElemExists(text|| - USIM-Attivo,(
-
-(selectByTextInside( - USIM-Attivo,0,()))
-(sendEnter())
-(wait(5))
-(switchToPopup())
-(wait(1))
-(selectFrame(2))
-(selectClass(PSINACTIVETAB,1,()))
-(sendEnter())
-(selectClass(PSEDITBOX_DISPONLY,0,()))
-(getText())
-
-)(
-
-(setRegister(SIM non attiva: controllo manuale richiesto))
-
-)))
+(ifEqual(e,0,(
 
 (createArrayFromString(f,|registerT|,\n))
 (getVar(z))
 (newExcel(f,15,|registerT|))
-(setVar(g,(maggio.xls,temp.xls)))
+(setVar(g,(aprile.xls,temp.xls)))
 (mergeExcel(g,result.xls))
-(removeFile(\maggio.xls))
-(renameFile(result.xls,maggio.xls))
+(removeFile(\aprile.xls))
+(renameFile(result.xls,aprile.xls))
 (removeFile(\temp.xls))
 
 (lodX())
-(saveToFile(maggio - elaboratedNums.txt,0))
+(saveToFile(aprile - elaboratedNums.txt,0))
 
 (close())
 (switchToMainWindow())
@@ -217,26 +138,20 @@ forEach(b,a,
 (alertDismiss(()()))
 (break(c))
 
-)))
-
 )()))
 
 )(
-
-(getVar(c))
-(ifEqual(0,-1,(
 
 (setRegister(KO))
 (createArrayFromString(f,|registerT|,\n))
 (getVar(z))
 (newExcel(f,15,|registerT|))
-(setVar(g,(maggio.xls,temp.xls)))
+(setVar(g,(aprile.xls,temp.xls)))
 (mergeExcel(g,result.xls))
-(removeFile(\maggio.xls))
-(renameFile(result.xls,maggio.xls))
+(removeFile(\aprile.xls))
+(renameFile(result.xls,aprile.xls))
 (removeFile(\temp.xls))
 
-)()))
 (selectFrame())
 (selectFrame(0))
 (selectClass(headerLinkActive,0,()))
@@ -259,21 +174,26 @@ forEach(b,a,
 
 )))
 
+)()))
+
+
+
+
 )(
 
 (setRegister(KO))
 (createArrayFromString(f,|registerT|,\n))
 (getVar(z))
 (newExcel(f,15,|registerT|))
-(setVar(g,(maggio.xls,temp.xls)))
+(setVar(g,(aprile.xls,temp.xls)))
 (mergeExcel(g,result.xls))
-(removeFile(\maggio.xls))
-(renameFile(result.xls,maggio.xls))
+(removeFile(\aprile.xls))
+(renameFile(result.xls,aprile.xls))
 (removeFile(\temp.xls))
 
 )))
 
-)))
+)
 
 (getVar(b))
 (addValToT(1))
@@ -284,6 +204,6 @@ forEach(b,a,
 
 )*
 
-moveBetweenWorkspaces(H3G\MERGE EXCEL 2\maggio.xls,H3G\CODICE SERIALE\maggio.xls,0)*
+moveBetweenWorkspaces(H3G\MERGE EXCEL 2\aprile.xls,H3G\CODICE SERIALE\aprile.xls,0)*
 
 close()

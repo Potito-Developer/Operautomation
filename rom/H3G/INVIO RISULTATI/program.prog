@@ -11,7 +11,7 @@ for(a=0;|registerT|,
 (storY())
 (readExcelCell(|i|-2))
 (storZ())
-(readExcelCell(|i|-3))
+(readExcelCell(|i|-4))
 (storW())
 
 (setVar(|i|,(name:|registerX|)(cod:|registerY|)(iccid:|registerZ|)(status:|registerW|)))

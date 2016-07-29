@@ -10,7 +10,7 @@ import os
 import os.path
 
 PROGRAM_PATH = "rom"
-currProgName = "out"
+currProgName = "\\out"
 workspace = ""
 
 print("Benvenuto in Operautomation, il sistema che semplifica il sistema.\n\nScegli il programma da avviare:\n")

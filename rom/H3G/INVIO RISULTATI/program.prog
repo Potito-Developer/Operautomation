@@ -19,5 +19,5 @@ for(a=0;|registerT|,
 )*
 
 getVars()*
-createJson()
+createJson()*
 sendPOST(https://masterattivazioni.it/index.php?r=ajax/portout&token=ilfuggitivo&mese=4&anno=2016)

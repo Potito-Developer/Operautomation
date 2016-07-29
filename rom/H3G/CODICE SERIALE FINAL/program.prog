@@ -1,6 +1,7 @@
 prepareWorkspace()*
 setWorkspace(H3G\MERGE EXCEL 2)*
 
+clearX(s)*
 openExcel(\aprile.xls,0)*
 getRowCount(\aprile.xls)*
 for(a=0;|registerT|,
@@ -56,14 +57,12 @@ setVar(c,(1))*
 forEach(b,a,
 
 
-(getVar(b))
-(readExcelCell(|registerT|-7))
-
 (clearT(s))
 (addVarFECycleToRegistry(b))
 
-(ifEqual(,-1,(
+(ifEqual(,-1,()(
 
+(getLength())
 (ifEqual(16,-1,(
 (setRegister(1))
 )(
@@ -75,7 +74,7 @@ forEach(b,a,
 (sendEnter())
 (selectFrame(2))
 (selectId(RB_FLT_CRIT_WRK_RA_VALUE$6,()))
-(clearT())
+(clearT(s))
 (addVarFECycleToRegistry(b))
 (setText(|registerT|))
 (sendEnter())
@@ -85,7 +84,6 @@ forEach(b,a,
 (selectId(B.PS_ELENCO_USIM_LAUNCH,()))
 (sendEnter())
 
-(wait(1))
 (alertDismiss((
 
 (setRegister(Problema riscontrato nella ricerca delle SIM associate: controllo manuale richiesto))
@@ -104,32 +102,29 @@ forEach(b,a,
 
 )(
 
-(setVar(c,(0)))
-(getVar(b))
-(readExcelCell(|registerT|-3))
-(setVar(e,(|registerT|)))
 (for(c=0;30,
 
 (ifElemExists(id||ASSETTAG$|i|,(
 
+(getVar(b))
+(readExcelCell(|registerT|-3))
+(setVar(e,(|registerT|)))
+
 (selectId(ASSETTAG$|i|,()))
 (getText())
+(substr(1:))
 (ifEqual(e,0,(
 
-(createArrayFromString(f,|registerT|,\n))
-(getVar(z))
-(newExcel(f,15,|registerT|))
-(setVar(g,(aprile.xls,temp.xls)))
-(mergeExcel(g,result.xls))
+(setRegister(no))
+(createArrayFromString(d,|registerT|,\n))
+(getVar(c))
+(newExcel(d,4,|registerT|))
+(setVar(e,(aprile.xls,temp.xls)))
+(mergeExcel(e,result.xls))
 (removeFile(\aprile.xls))
 (renameFile(result.xls,aprile.xls))
 (removeFile(\temp.xls))
 
-(lodX())
-(saveToFile(aprile - elaboratedNums.txt,0))
-
-(close())
-(switchToMainWindow())
 (selectFrame())
 (selectFrame(0))
 (selectClass(headerLinkActive,0,()))
@@ -142,12 +137,12 @@ forEach(b,a,
 
 )(
 
-(setRegister(KO))
-(createArrayFromString(f,|registerT|,\n))
-(getVar(z))
-(newExcel(f,15,|registerT|))
-(setVar(g,(aprile.xls,temp.xls)))
-(mergeExcel(g,result.xls))
+(setRegister(ko))
+(createArrayFromString(d,|registerT|,\n))
+(getVar(c))
+(newExcel(d,4,|registerT|))
+(setVar(e,(aprile.xls,temp.xls)))
+(mergeExcel(e,result.xls))
 (removeFile(\aprile.xls))
 (renameFile(result.xls,aprile.xls))
 (removeFile(\temp.xls))
@@ -156,6 +151,7 @@ forEach(b,a,
 (selectFrame(0))
 (selectClass(headerLinkActive,0,()))
 (sendEnter())
+(wait(1))
 (alertDismiss(()()))
 (break(c))
 
@@ -167,6 +163,16 @@ forEach(b,a,
 
 )(
 
+(setRegister(ko))
+(createArrayFromString(d,|registerT|,\n))
+(getVar(c))
+(newExcel(d,4,|registerT|))
+(setVar(e,(aprile.xls,temp.xls)))
+(mergeExcel(e,result.xls))
+(removeFile(\aprile.xls))
+(renameFile(result.xls,aprile.xls))
+(removeFile(\temp.xls))
+
 (selectFrame())
 (selectFrame(0))
 (selectClass(headerLinkActive,0,()))
@@ -174,33 +180,14 @@ forEach(b,a,
 
 )))
 
-)()))
-
-
-
-
-)(
-
-(setRegister(KO))
-(createArrayFromString(f,|registerT|,\n))
-(getVar(z))
-(newExcel(f,15,|registerT|))
-(setVar(g,(aprile.xls,temp.xls)))
-(mergeExcel(g,result.xls))
-(removeFile(\aprile.xls))
-(renameFile(result.xls,aprile.xls))
-(removeFile(\temp.xls))
-
 )))
-
-)
 
 (getVar(b))
 (addValToT(1))
 (setVar(b,(|registerT|)))
-(getVar(z))
+(getVar(c))
 (addValToT(1))
-(setVar(z,(|registerT|)))
+(setVar(c,(|registerT|)))
 
 )*
 

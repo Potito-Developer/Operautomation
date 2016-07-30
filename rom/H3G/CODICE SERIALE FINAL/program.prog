@@ -191,6 +191,6 @@ forEach(b,a,
 
 )*
 
-moveBetweenWorkspaces(H3G\MERGE EXCEL 2\aprile.xls,H3G\CODICE SERIALE\aprile.xls,0)*
+moveBetweenWorkspaces(H3G\MERGE EXCEL 2\aprile.xls,H3G\CODICE SERIALE FINAL\aprile.xls,0)*
 
 close()

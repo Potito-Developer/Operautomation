@@ -1,4 +1,4 @@
-setWorkspace(H3G\CODICE SERIALE)*
+setWorkspace(H3G\CODICE SERIALE FINAL)*
 
 openExcel(\aprile.xls,0)*
 getRowCount(\aprile.xls)*

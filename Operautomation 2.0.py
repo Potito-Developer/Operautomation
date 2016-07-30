@@ -750,7 +750,9 @@ def createJson():
 
 def sendPOST(url):
     global registerT
-    registerT = requests.post(url, data={"data": registerT})
+    url = information.split(",")[0]
+    varName = information.split(",")[1]
+    registerT = requests.post(url, data={varName: registerT})
 
 def storX():
     global registerX

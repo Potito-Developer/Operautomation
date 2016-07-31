@@ -2,8 +2,8 @@ prepareWorkspace()*
 setWorkspace(H3G\MERGE EXCEL 2)*
 
 clearX(s)*
-openExcel(\aprile.xls,0)*
-getRowCount(\aprile.xls)*
+openExcel(\maggio.xls,0)*
+getRowCount(\maggio.xls)*
 for(a=0;|registerT|,
 
 (readExcelCell(|i|-4))
@@ -90,10 +90,10 @@ forEach(b,a,
 (createArrayFromString(d,|registerT|,\n))
 (getVar(c))
 (newExcel(d,4,|registerT|))
-(setVar(e,(aprile.xls,temp.xls)))
+(setVar(e,(maggio.xls,temp.xls)))
 (mergeExcel(e,result.xls))
-(removeFile(\aprile.xls))
-(renameFile(result.xls,aprile.xls))
+(removeFile(\maggio.xls))
+(renameFile(result.xls,maggio.xls))
 (removeFile(\temp.xls))
 (selectFrame())
 (selectFrame(0))
@@ -119,10 +119,10 @@ forEach(b,a,
 (createArrayFromString(d,|registerT|,\n))
 (getVar(c))
 (newExcel(d,4,|registerT|))
-(setVar(e,(aprile.xls,temp.xls)))
+(setVar(e,(maggio.xls,temp.xls)))
 (mergeExcel(e,result.xls))
-(removeFile(\aprile.xls))
-(renameFile(result.xls,aprile.xls))
+(removeFile(\maggio.xls))
+(renameFile(result.xls,maggio.xls))
 (removeFile(\temp.xls))
 
 (selectFrame())
@@ -141,10 +141,10 @@ forEach(b,a,
 (createArrayFromString(d,|registerT|,\n))
 (getVar(c))
 (newExcel(d,4,|registerT|))
-(setVar(e,(aprile.xls,temp.xls)))
+(setVar(e,(maggio.xls,temp.xls)))
 (mergeExcel(e,result.xls))
-(removeFile(\aprile.xls))
-(renameFile(result.xls,aprile.xls))
+(removeFile(\maggio.xls))
+(renameFile(result.xls,maggio.xls))
 (removeFile(\temp.xls))
 
 (selectFrame())
@@ -167,10 +167,10 @@ forEach(b,a,
 (createArrayFromString(d,|registerT|,\n))
 (getVar(c))
 (newExcel(d,4,|registerT|))
-(setVar(e,(aprile.xls,temp.xls)))
+(setVar(e,(maggio.xls,temp.xls)))
 (mergeExcel(e,result.xls))
-(removeFile(\aprile.xls))
-(renameFile(result.xls,aprile.xls))
+(removeFile(\maggio.xls))
+(renameFile(result.xls,maggio.xls))
 (removeFile(\temp.xls))
 
 (selectFrame())
@@ -191,6 +191,6 @@ forEach(b,a,
 
 )*
 
-moveBetweenWorkspaces(H3G\MERGE EXCEL 2\aprile.xls,H3G\CODICE SERIALE FINAL\aprile.xls,0)*
+moveBetweenWorkspaces(H3G\MERGE EXCEL 2\maggio.xls,H3G\CODICE SERIALE FINAL\maggio.xls,0)*
 
 close()

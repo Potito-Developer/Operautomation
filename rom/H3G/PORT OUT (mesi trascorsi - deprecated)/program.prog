@@ -7,10 +7,13 @@ nav(https://webstation3.h3g.it/autenticazione/MainServlet?TYPE=33554432&REALMOID
 selectName(USER,0)*
 setText(D0ESG)*
 selectName(PASSCODE,0)*
-setText(1234012445)*
+input(Inserisci il token)*
+setText(1234|registerT|)*
 sendEnter()*
 
-for(a=4;32,
+getDaysInMounth(5,2016)*
+addValToT(1)*
+for(a=1;|registerT|,
 
 (wait(3))
 (selectClass(PSHYPERLINK,4,()))

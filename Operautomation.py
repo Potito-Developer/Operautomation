@@ -8,23 +8,28 @@ VARS = {}
 #Not EDIT
 import os
 import os.path
+import sys
 
 PROGRAM_PATH = "rom"
-currProgName = "\\out"
+currProgName = "out"
 workspace = ""
 
 print("Benvenuto in Operautomation, il sistema che semplifica il sistema.\n\nScegli il programma da avviare:\n")
 
-stopCycle = 0;
+stopCycle = 0
+arg = 1
 while(stopCycle == 0):
-    programs = next(os.walk(PROGRAM_PATH))[1];
+    programs = next(os.walk(PROGRAM_PATH))[1]
 
     n = 1
     while(n <= len(programs)):
         print(str(n) + ". " + programs[n - 1])
         n = n + 1
 
-    progN = eval(input('\nQuale programma vorresti avviare: '))
+    if len(sys.argv) == 1:
+        progN = eval(input('\nQuale programma vorresti avviare: '))
+    else:
+        progN = eval(sys.argv[arg])
 
     if progN > 0 and progN <= len(programs):
         PROGRAM_PATH += "\\" + programs[progN - 1]
@@ -35,10 +40,12 @@ while(stopCycle == 0):
             stopCycle = 1
         else:
             print("\n\nSono stati trovati sottoprogrammi. Seleziona quale aprire:\n")
+            arg = 1
     else:
         stopCycle = 1
         print("\nApplicazione non trovata\n")
         input("Premi Enter per uscire")
+    arg += 1
 
 # main execution
 
@@ -55,10 +62,10 @@ import xlrd
 import html
 from datetime import datetime, timedelta
 import calendar
-import sys
 #import pyautogui
 import json
 import requests
+from calendar import monthrange
 
 browser = None
 main_window_handle = None
@@ -115,7 +122,7 @@ def replaceRegisterValues(inputStr):
 
 def prepareWorkspace():
     global workspace
-    workspace = os.getcwd() + currProgName
+    workspace = os.getcwd() + "\\" + currProgName
     if not os.path.exists(workspace):
         os.makedirs(workspace)
 def setWorkspace(path):
@@ -123,7 +130,7 @@ def setWorkspace(path):
     workspace = os.getcwd() + "\\out\\" + path
 def restoreWorkspace():
     global workspace
-    workspace = os.getcwd() + currProgName
+    workspace = os.getcwd() + "\\" + currProgName
 
 def initFirefox(savepath = ""):
     global browser
@@ -711,6 +718,12 @@ def numToMonth(monthNum):
     global registerT
     registerT = calendar.month_name[int(monthNum)]
 
+def getDaysInMounth(yearAndmonth):
+    global registerT
+    year = int(yearAndmonth.split(",")[0])
+    month = int(yearAndmonth.split(",")[1])
+    registerT = monthrange(year, month)[1]
+
 def renameFile(information):
     os.rename(workspace + "\\" + information.split(",")[0], workspace + "\\" + information.split(",")[1])
 
@@ -1106,6 +1119,8 @@ for line in lines:
         getVars()
     elif instruction == "numToMonth":
         numToMonth(information)
+    elif instruction == "getDaysInMounth":
+        getDaysInMounth(information)
     elif instruction == "renameFile":
         renameFile(information)
     elif instruction == "removeFile":

@@ -1,7 +1,7 @@
 setWorkspace(H3G\CODICE SERIALE FINAL)*
 
-openExcel(\aprile.xls,0)*
-getRowCount(\aprile.xls)*
+openExcel(\maggio.xls,0)*
+getRowCount(\maggio.xls)*
 
 for(a=0;|registerT|,
 
@@ -20,4 +20,5 @@ for(a=0;|registerT|,
 
 getVars()*
 createJson()*
-sendPOST(https://masterattivazioni.it/index.php?r=ajax/portout&token=ilfuggitivo&mese=4&anno=2016)
+sendPOST(https://masterattivazioni.it/index.php?r=ajax/portout&token=ilfuggitivo,data)*
+printT()

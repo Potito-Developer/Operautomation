@@ -7,12 +7,14 @@ addTextToRegistry( )*
 addX()*
 storX()*
 createFolder(downloads\|registerT|)*
-initFirefox(downloads\|registerT|)*
+setWorkspace(H3G\ATTIVAZIONI GIORNALIERE\downloads\|registerT|)*
+initFirefox()*
 nav(https://webstation3.h3g.it/autenticazione/MainServlet?TYPE=33554432&REALMOID=06-dc051320-3c89-1012-b426-838589750cb3&GUID=&SMAUTHREASON=0&METHOD=GET&SMAGENTNAME=-SM-V28Eh3qJ9516BBeLVrH2Q8QnmzOwo%2FvWbvFaNPT6arG75TSWwvPkDaCt8LYg6RYn&TARGET=-SM-https%3A%2F%2Fwebstation3.h3g.it%2Fps%2F)*
 selectName(USER,0)*
 setText(D0ESG)*
 selectName(PASSCODE,0)*
-setText(1234526275)*
+input(Inserisci il token)*
+setText(1234|registerT|)*
 sendEnter()*
 
 selectClass(PSHYPERLINK,4,())*
@@ -20,22 +22,22 @@ sendEnter()*
 selectFrame(2)*
 selectId(RB_FLT_CRIT_WRK_RA_VALUE_DROPDOWN$22,())*
 selectValue(0,SO)*
-selectId(RB_FLT_CRIT_WRK_RA_VALUE_DATE2$25,())*
+selectId(RB_FLT_CRIT_WRK_RA_FILTER_OPER$25,())*
+selectValue(0,2)*
+wait(1)*
+selectId(RB_FLT_CRIT_WRK_RA_VALUE_DATE$25,())*
 getCurrDate(%m/%d/%Y)*
 setText(|registerT|)*
-subDays(%m/%d/%Y,1)*
-selectId(RB_FLT_CRIT_WRK_RA_VALUE_DATE$25,())*
-sendClick()*
-wait(5)*
-selectId(RB_FLT_CRIT_WRK_RA_VALUE_DATE$25,())*
-setText(|registerT|)*
 sendEnter()*
+wait(1)*
 selectId(RO_SEARCH_VW$hexcel$0,())*
 sendEnter()*
 getCurrDate(%H.%M)*
 storY()*
 getCurrDate(%d)*
 wait(10)*
-renameFile(downloads\|registerX|\ps.xls,downloads\|registerX|\|registerT| - |registerY|.xls)*
+convertToExcel(ps.xls)*
+removeFile(\ps.xls)*
+renameFile(ps - converted.xls,|registerT| - |registerY|.xls)*
 
 close()

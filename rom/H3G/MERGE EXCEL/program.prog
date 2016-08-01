@@ -7,7 +7,9 @@ addTextToRegistry( )*
 addX()*
 storX()*
 createFolder(|registerX|)*
-setWorkspace(ATTIVAZIONI GIORNALIERE\downloads\|registerX|)*
+setWorkspace(H3G\ATTIVAZIONI GIORNALIERE\downloads\|registerX|)*
+
+clearZ(s)*
 getFiles()*
 forEach(a,0,
 
@@ -18,22 +20,20 @@ forEach(a,0,
 (getCurrDate(%d))
 (ifEqual(|registerY|,-1,(
 
-(getFileName(a))
-(convertToExcel(|registerT|.xls))
 (getFullFileName(a))
-(substr(:-4))
-(addTextToRegistry( - converted.xls\n))
+(addTextToRegistry(\n))
 (storW())
 (lodZ())
 (addW())
 (storZ())
-(removeFile(a))
 
 )())))*
 
 getFiles()*
-createArrayFromString(b,|registerZ|,\n)*
+lodZ()*
+substr(:-2)*
+createArrayFromString(b,|registerT|,\n)*
 mergeExcel(b,|registerY|.xls)*
 
 forEach(c,0,(removeFile(c)))*
-moveBetweenWorkspaces(ATTIVAZIONI GIORNALIERE\downloads\|registerX|\|registerY|.xls,MERGE EXCEL\|registerX|\|registerY|.xls,0)
+moveBetweenWorkspaces(H3G\ATTIVAZIONI GIORNALIERE\downloads\|registerX|\|registerY|.xls,H3G\MERGE EXCEL\|registerX|\|registerY|.xls,0)

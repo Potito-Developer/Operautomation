@@ -1000,6 +1000,12 @@ def filterExcelByColumnVal(information):
     df.to_excel(writer, 'Sheet1', index = None)
     writer.save()
 
+import Image
+import pytesseract
+def image2Text(pathToImage):
+    global registerT
+    registerT = pytesseract.image_to_string(Image.open(workspace + "\\" + pathToImage))
+
 # End functions
 
 file = open(PROGRAM_PATH, 'r')
@@ -1193,6 +1199,8 @@ for line in lines:
         filterExcelByColumnVal(information)
     elif instruction == "moveBetweenWorkspaces":
         moveBetweenWorkspaces(information)
+    elif instruction == "image2Text":
+        image2Text(information)
     elif instruction == "addValToT":
         addValToT(information)
     elif instruction == "subValToT":

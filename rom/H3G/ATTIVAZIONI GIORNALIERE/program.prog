@@ -1,3 +1,6 @@
+setWorkspace(webcam)*
+image2Text(webcam.jpg)*
+appExit()*
 prepareWorkspace()*
 getCurrDate(%Y)*
 storX()*

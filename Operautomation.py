@@ -56,6 +56,8 @@ while(stopCycle == 0):
 
 import time
 import PyPDF2
+#from selenium import webdriver
+#from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import NoSuchElementException
@@ -67,7 +69,6 @@ import xlrd
 import html
 from datetime import datetime, timedelta
 import calendar
-#import pyautogui
 import json
 import requests
 from calendar import monthrange
@@ -140,12 +141,18 @@ def restoreWorkspace():
 def initFirefox(savepath = ""):
     global browser
     global main_window_handle
+
+    #caps = DesiredCapabilities.FIREFOX
+    #caps["marionette"] = True
+    #caps['acceptSslCerts'] = True
+    
     profile = webdriver.FirefoxProfile()
+    profile.accept_untrusted_certs = True
     profile.set_preference('browser.download.folderList', 2)
     profile.set_preference('browser.download.manager.showWhenStarting', False)
     profile.set_preference('browser.download.dir', workspace + "\\" + savepath)
     profile.set_preference('browser.helperApps.neverAsk.saveToDisk', ('application/vnd.ms-excel'))
-    browser = webdriver.Firefox(profile)
+    browser = webdriver.Firefox(firefox_profile=profile)#, capabilities=caps
     while not main_window_handle:
         main_window_handle = browser.current_window_handle
 

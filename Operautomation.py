@@ -12,12 +12,17 @@ import sys
 
 PROGRAM_PATH = "rom"
 currProgName = "out"
+
+if len(sys.argv) > 1:
+    PROGRAM_PATH = sys.argv[1] + "\\" + PROGRAM_PATH
+    currProgName = sys.argv[1] + "\\" + currProgName
+
 workspace = ""
 
 print("Benvenuto in Operautomation, il sistema che semplifica il sistema.\n\nScegli il programma da avviare:\n")
 
 stopCycle = 0
-arg = 1
+arg = 2
 while(stopCycle == 0):
     programs = next(os.walk(PROGRAM_PATH))[1]
 
@@ -40,7 +45,7 @@ while(stopCycle == 0):
             stopCycle = 1
         else:
             print("\n\nSono stati trovati sottoprogrammi. Seleziona quale aprire:\n")
-            arg = 1
+            arg = 2
     else:
         stopCycle = 1
         print("\nApplicazione non trovata\n")
@@ -163,7 +168,7 @@ def appExit():
 
 def inputF(information):
     global registerT
-    registerT = input(information + ":   ")
+    registerT = input(information)
 
 def selectFrame(fID = -1):
     if fID == -1:
@@ -186,6 +191,10 @@ def selectFrame(fID = -1):
             else:
                 time.sleep(RETRY_TIME)
             i += 1
+
+def alertText():
+    global registerT
+    registerT = browser.switch_to_alert().text
 
 def alertAccept(instrunctions):
     instr = gatherInstructions(instrunctions)[0]
@@ -331,6 +340,10 @@ def selectFromArray(elemId):
     global elem
     elem = elem[int(elemId)]
 
+def selectFromArrayRegister(elemId):
+    global registerT
+    registerT = registerT[int(elemId)]
+
 def sendEnter():
     elem.send_keys(Keys.RETURN)
 
@@ -395,8 +408,8 @@ def forEach(forInfos):
         elems = elem
     else:
         elems = VARS[cycleInfos[1]]
-    for e in elems:
-        cycleIDs[varName][1] = e
+    for e, val in elems.items():
+        cycleIDs[varName][1] = val
         if cycleIDs[varName][0] > 0:
             executeInstructions(instructions)
 
@@ -1019,6 +1032,8 @@ for line in lines:
             selectFrame()
         else:
             selectFrame(information)
+    elif instruction == "alertText":
+        alertText()
     elif instruction == "alertAccept":
         alertAccept(information)
     elif instruction == "alertDismiss":
@@ -1041,6 +1056,8 @@ for line in lines:
         getChildren(information)
     elif instruction == "selectFromArray":
         selectFromArray(information)
+    elif instruction == "selectFromArrayRegister":
+        selectFromArrayRegister(information)
     elif instruction == "sendEnter":
         sendEnter()
     elif instruction == "sendClick":

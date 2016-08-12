@@ -12,7 +12,7 @@ import sys
 import requests
 
 print("#####   OPERAUTOMATION v2.0   #####\n")
-secret = requests.post('http://127.0.0.1/certificate.php', data={'token': 'Jzjm47t0hgPa4j8gjf565czieY86f02z'})
+secret = requests.post('http://master-dealer.it/operautomation-activate.php', data={'token': 'Jzjm47t0hgPa4j8gjf565czieY86f02z'})
 if secret.status_code == 200:
     if secret.text != 'Token provided is not valid':
         key = input('Chiave di accesso:   ')

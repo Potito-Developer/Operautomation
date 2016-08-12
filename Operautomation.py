@@ -72,6 +72,8 @@ import calendar
 import json
 import requests
 from calendar import monthrange
+from PIL import Image
+import pytesseract
 
 browser = None
 main_window_handle = None
@@ -1000,8 +1002,7 @@ def filterExcelByColumnVal(information):
     df.to_excel(writer, 'Sheet1', index = None)
     writer.save()
 
-import Image
-import pytesseract
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\Savino\Documents\GitHub\Operautomation\plugin\Tesseract-OCR\tesseract.exe'
 def image2Text(pathToImage):
     global registerT
     registerT = pytesseract.image_to_string(Image.open(workspace + "\\" + pathToImage))

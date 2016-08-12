@@ -29,13 +29,13 @@ forEach(a,a,
 (substr(12:))
 (storZ())
 
-(for(b=0;9,
+(for(b=0;10,
 
 (setRegister(|i|))
 (storW())
 
 (setVar(b,(-1)))
-(for(c=0;9,
+(for(c=0;10,
 
 (getVar(b))
 (addValToT(1))

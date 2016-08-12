@@ -9,6 +9,22 @@ VARS = {}
 import os
 import os.path
 import sys
+import requests
+
+print("#####   OPERAUTOMATION v2.0   #####\n")
+secret = requests.post('http://127.0.0.1/certificate.php', data={'token': 'Jzjm47t0hgPa4j8gjf565czieY86f02z'})
+if secret.status_code == 200:
+    if secret.text != 'Token provided is not valid':
+        key = input('Chiave di accesso:   ')
+        if key != secret.text:
+            input('\nLa chiave di accesso inserita non è valida.\nContattare l\'amministratore per ottenere una nuova chiave')
+            sys.exit()
+    else:
+        input('Il token non è valido. Contattare l\'amministratore del software per risolvere il problema')
+        sys.exit()
+else:
+    input('Errore di connessione con il server (Error ' + str(secret.status_code) + ')')
+    sys.exit()
 
 PROGRAM_PATH = "rom"
 currProgName = "out"
@@ -19,7 +35,7 @@ if len(sys.argv) > 1:
 
 workspace = ""
 
-print("Benvenuto in Operautomation, il sistema che semplifica il sistema.\n\nScegli il programma da avviare:\n")
+print("\n\nBenvenuto in Operautomation, il sistema che semplifica il sistema.\n\nScegli il programma da avviare:\n")
 
 stopCycle = 0
 arg = 2
@@ -70,7 +86,6 @@ import html
 from datetime import datetime, timedelta
 import calendar
 import json
-import requests
 from calendar import monthrange
 from PIL import Image
 import pytesseract
@@ -1002,7 +1017,7 @@ def filterExcelByColumnVal(information):
     df.to_excel(writer, 'Sheet1', index = None)
     writer.save()
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Users\Savino\Documents\GitHub\Operautomation\plugin\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'plugin\Tesseract-OCR\tesseract.exe'
 def image2Text(pathToImage):
     global registerT
     registerT = pytesseract.image_to_string(Image.open(workspace + "\\" + pathToImage))

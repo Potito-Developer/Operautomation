@@ -89,6 +89,7 @@ import json
 from calendar import monthrange
 from PIL import Image
 import pytesseract
+import subprocess
 
 browser = None
 main_window_handle = None
@@ -1022,6 +1023,30 @@ def image2Text(pathToImage):
     global registerT
     registerT = pytesseract.image_to_string(Image.open(workspace + "\\" + pathToImage))
 
+def extractToken(token):
+    tokImage = Image.open("tokens\\" + token)
+    tokImageC = tokImage.crop((102, 137, 102 + 179, 137 + 53))
+    tokImageC.save("temp\\" + token)
+def token2text(token):
+    global registerT
+    extractToken(token)
+    result = ""
+    i = 0
+    x = 23
+    y = 10
+    while(i < 6):
+        tokImage = Image.open("temp\\" + token)
+        if i == 3:
+            x += 11
+        tokImageC = tokImage.crop((x, y, x + 24, y + 38))
+        tokImageC.save("temp\\" + token[:-4] + "-" + str(i) + ".jpg")
+        result += subprocess.Popen(["plugin\\ssocr.exe", "-t", "35", "-d", "-1", "-n", "4", "temp\\" + token[:-4] + "-" + str(i) + ".jpg"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell = True).communicate()[0].decode()[:-1]
+        os.remove("temp\\" + token[:-4] + "-" + str(i) + ".jpg")
+        i += 1
+        x += 23
+    os.remove("temp\\" + token)
+    registerT = result.replace(" ", "")
+
 # End functions
 
 file = open(PROGRAM_PATH, 'r')
@@ -1217,6 +1242,8 @@ for line in lines:
         moveBetweenWorkspaces(information)
     elif instruction == "image2Text":
         image2Text(information)
+    elif instruction == "token2text":
+        token2text(information)
     elif instruction == "addValToT":
         addValToT(information)
     elif instruction == "subValToT":

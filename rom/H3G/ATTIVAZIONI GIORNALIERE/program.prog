@@ -1,5 +1,5 @@
 setWorkspace(webcam)*
-image2Text(webcam.jpg)*
+token2text(h3g.jpg)*
 printT()*
 appExit()*
 prepareWorkspace()*

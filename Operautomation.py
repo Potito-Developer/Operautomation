@@ -15,7 +15,13 @@ print("#####   OPERAUTOMATION v2.0   #####\n")
 secret = requests.post('http://master-dealer.it/operautomation-activate.php', data={'token': 'Jzjm47t0hgPa4j8gjf565czieY86f02z'})
 if secret.status_code == 200:
     if secret.text != 'Token provided is not valid':
-        key = input('Chiave di accesso:   ')
+        arg = 0
+        if "python.exe" in os.popen("tasklist").read():
+            arg = 1
+        if len(sys.argv) <= arg:
+            key = input('Chiave di accesso:   ')
+        else:
+            key = sys.argv[arg]
         if key != secret.text:
             input('\nLa chiave di accesso inserita non è valida.\nContattare l\'amministratore per ottenere una nuova chiave')
             sys.exit()
@@ -39,6 +45,8 @@ print("\n\nBenvenuto in Operautomation, il sistema che semplifica il sistema.\n\
 
 stopCycle = 0
 arg = 2
+if "python.exe" in os.popen("tasklist").read():
+    arg = 3
 while(stopCycle == 0):
     programs = next(os.walk(PROGRAM_PATH))[1]
 
@@ -62,6 +70,8 @@ while(stopCycle == 0):
         else:
             print("\n\nSono stati trovati sottoprogrammi. Seleziona quale aprire:\n")
             arg = 2
+            if "python.exe" in os.popen("tasklist").read():
+                arg = 3
     else:
         stopCycle = 1
         print("\nApplicazione non trovata\n")

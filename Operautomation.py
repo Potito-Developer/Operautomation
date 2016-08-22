@@ -15,11 +15,7 @@ print("#####   OPERAUTOMATION v2.0   #####\n")
 secret = requests.post('http://master-dealer.it/operautomation-activate.php', data={'token': 'Jzjm47t0hgPa4j8gjf565czieY86f02z'})
 if secret.status_code == 200:
     if secret.text != 'Token provided is not valid':
-        arg = 0
-        if "python.exe" in os.popen("tasklist").read():
-            arg = 1
-        print(arg)
-        print(len(sys.argv))
+        arg = 1
         if len(sys.argv) <= arg:
             key = input('Chiave di accesso:   ')
         else:
@@ -37,18 +33,16 @@ else:
 PROGRAM_PATH = "rom"
 currProgName = "out"
 
-if len(sys.argv) > 1:
+'''if len(sys.argv) > 1:
     PROGRAM_PATH = sys.argv[1] + "\\" + PROGRAM_PATH
-    currProgName = sys.argv[1] + "\\" + currProgName
+    currProgName = sys.argv[1] + "\\" + currProgName'''
 
 workspace = ""
 
 print("\n\nBenvenuto in Operautomation, il sistema che semplifica il sistema.\n\nScegli il programma da avviare:\n")
 
 stopCycle = 0
-arg = 2
-if "python.exe" in os.popen("tasklist").read():
-    arg = 3
+argP = arg + 1
 while(stopCycle == 0):
     programs = next(os.walk(PROGRAM_PATH))[1]
 
@@ -57,10 +51,10 @@ while(stopCycle == 0):
         print(str(n) + ". " + programs[n - 1])
         n = n + 1
 
-    if len(sys.argv) == 1:
+    if len(sys.argv) <= 2:
         progN = eval(input('\nQuale programma vorresti avviare: '))
     else:
-        progN = eval(sys.argv[arg])
+        progN = eval(sys.argv[argP])
 
     if progN > 0 and progN <= len(programs):
         PROGRAM_PATH += "\\" + programs[progN - 1]
@@ -71,14 +65,12 @@ while(stopCycle == 0):
             stopCycle = 1
         else:
             print("\n\nSono stati trovati sottoprogrammi. Seleziona quale aprire:\n")
-            arg = 2
-            if "python.exe" in os.popen("tasklist").read():
-                arg = 3
+            argP = arg + 1
     else:
         stopCycle = 1
         print("\nApplicazione non trovata\n")
         input("Premi Enter per uscire")
-    arg += 1
+    argP += 1
 
 # main execution
 
@@ -201,7 +193,8 @@ def close():
     browser.close()
 
 def appExit():
-    input("Premi Invio per terminare")
+    if len(sys.argv) <= 2:
+        input("Premi Invio per terminare")
     sys.exit()
 
 def inputF(information):
@@ -1300,7 +1293,8 @@ for line in lines:
     elif instruction == "printW":
         printW()
 
-input("Premi Invio per terminare")
+if len(sys.argv) <= 2:
+    input("Premi Invio per terminare")
 
 # INSTRUCTIONS REFERENCE
 

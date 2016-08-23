@@ -1,1 +1,1 @@
-start /d "C:\Users\Potito\Documents\GitHub\Operautomation" Operautomation.exe %*
+start /d "C:\Users\Savino\Documents\GitHub\Operautomation" Operautomation.exe %*

@@ -176,6 +176,8 @@ def initFirefox(savepath = ""):
     profile.set_preference('browser.download.dir', workspace + "\\" + savepath)
     profile.set_preference('browser.helperApps.neverAsk.saveToDisk', ('application/vnd.ms-excel'))
     browser = webdriver.Firefox(firefox_profile=profile)#, capabilities=caps
+    #browser = webdriver.Remote(command_executor="http://127.0.0.1:58324/hub",desired_capabilities={})
+    #browser.session_id = "9566f37f-a909-4b52-9a04-83532eaf7577"
     while not main_window_handle:
         main_window_handle = browser.current_window_handle
 
@@ -1031,7 +1033,7 @@ def image2Text(pathToImage):
 
 def extractToken(token):
     tokImage = Image.open("tokens\\" + token)
-    tokImageC = tokImage.crop((480, 355, 480 + 102, 355 + 28))
+    tokImageC = tokImage.crop((433, 382, 433 + 102, 382 + 28))
     tokImageC.save("temp\\" + token)
 def token2text(token):
     global registerT
@@ -1046,7 +1048,7 @@ def token2text(token):
             x += 6
         tokImageC = tokImage.crop((x, y, x + 15, y + 26))
         tokImageC.save("temp\\" + token[:-4] + "-" + str(i) + ".jpg")
-        result += subprocess.Popen(["plugin\\ssocr.exe", "-t", "48", "-d", "-1", "-n", "1", "temp\\" + token[:-4] + "-" + str(i) + ".jpg"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell = True).communicate()[0].decode()[:-1] #"-n", "3", "-i", "1", 
+        result += subprocess.Popen(["plugin\\ssocr.exe", "-t", "48", "-d", "-1", "-n", "1", "-i", "1", "temp\\" + token[:-4] + "-" + str(i) + ".jpg"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell = True).communicate()[0].decode()[:-1] #"-n", "3", "-i", "1", 
         #os.remove("temp\\" + token[:-4] + "-" + str(i) + ".jpg")
         i += 1
         x += 16
